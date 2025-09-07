@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DTS Telugu Songs</title>
+  <style>
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://lh3.googleusercontent.com/pw/AP1GczNIjSf9IJz2zVMju4RcYCHwUeK3aiPlcYniagBHryuZ_PMeqeVSOoIrvA5m7rjBa0uixuczuhfXqy7IBiAr0lHl7BMEWlHM0C1OZLFzll-4E8O8pss=w2400') 
+      no-repeat center center/cover;
+      background-attachment: fixed;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      backdrop-filter: blur(6px);
+      background: rgba(255,255,255,0.05);
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      margin: 3px;
+      padding: 2px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+    }
+    header img {
+      width: 100px; height: 100px; border-radius: 50%;
+      margin-top: 10px; 
+      margin-bottom: 3px; 
+      border: 2px solid rgba(255,255,255,0.6); 
+      box-shadow: 0 0 20px rgba(255,255,255,0.8);
+    }
+    header p {
+      font-size: 1.2rem; opacity: 1.0; 
+      text-shadow: 0 0 10px rgba(0,0,0,1.0);
+      margin-bottom: 3px;
+    }
+
+    /* Menu toggle button */
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(0,0,0,1.0);
+      padding: 0px 0px;
+      text-align: center;
+    }
+
+    /* Desktop Nav (default) */
+    nav {
+      backdrop-filter: blur(6px);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      box-shadow: 0 0 10px rgba(0,0,0,1.0);
+    }
+    nav a {
+      color: #fff;
+      padding: 5px 20px;
+      text-decoration: none;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    nav a:hover {background: rgb(255, 166, 0); border-radius:10px;}
+
+    /* Footer (under nav) */
+    footer {
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.05);
+      padding: 5px;
+      text-align: center;
+      box-shadow: 0 -5px 20px rgba(0,0,0,1.0);
+      margin-top: 5px;
+      border-radius: 15px;
+    }
+    footer input[type="text"] {
+      padding: 5px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      min-width: 200px;
+      width: fit-content;
+      max-width: 100%;
+    }
+
+    /* Grid settings */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1400px;
+      margin: auto;
+      flex: 1;
+    }
+
+    /* Card */
+    .card {
+      position: relative;
+      backdrop-filter: blur(20px);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      transition: transform 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: #fff;
+      display: block;
+    }
+    .card:hover {transform: scale(1.05);}
+    .card img {
+      width:100%; 
+      height:100%; 
+      object-fit: cover;
+      display: block;
+    }
+    .card .title {
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      padding: 10px;
+      background: rgba(0,0,0,0.7);
+      text-align: center;
+      font-weight: bold;
+      opacity: 0;
+      transform: translateY(100%);
+      transition: all 0.3s ease;
+    }
+    .card:hover .title {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+      gap: 10px;
+    }
+    .pagination button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .pagination button:hover {background: rgba(255,165,0,0.5);}
+    .pagination button.active {background: rgba(255,165,0,0.8);}
+
+    /* Mobile Nav */
+    @media(max-width: 768px){
+      .menu-toggle {display: block;}
+      nav {
+        display: none;
+        flex-direction: column;
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(20px);
+        border-radius: 15px;
+        margin: 10px auto 0 auto; /* center align */
+        width: 50%;       /* only as wide as text */
+        padding: 10px 20px;
+        align-items: center;
+      }
+      nav.show {display: flex;}
+      nav a {
+        padding: 5px;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+      }
+      .grid {grid-template-columns: repeat(2, 1fr);}
+      header p {font-size:0.9rem;}
+    }
+
+    @media(min-width: 769px){
+      .grid {grid-template-columns: repeat(5, 1fr);}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="dts Telugu Songs F.png" alt="Logo">
+    <p>Theater-level Surround Audio – Only for Headphones</p>
+
+    <!-- 🔥 Mobile Menu Button -->
+    <div class="menu-toggle" id="menu-toggle">☰</div>
+
+    <!-- Nav Menu -->
+    <nav id="nav-menu">
+      <a href="DTS Telugu Songs.html">Home</a>
+      <a href="Difference.html">Difference</a>
+      <a href="Contact us.html">Contact Us</a>
+      <a href="About us.html">About Us</a>
+    </nav>
+
+    <!-- Footer under Nav -->
+    <footer>
+      <input type="text" id="search" placeholder="Search songs...">
+    </footer>
+  </header>
+
+  <section class="grid" id="card-container">
+    <!-- Example Cards -->
+    <a href="rrr.html" class="card"><img src="RRR.jpg"><div class="title">RRR Songs</div></a>
+    <a href="salar.html" class="card"><img src="salar.jpg"><div class="title">Salaar Songs</div></a>
+    <!-- More cards... -->
+  </section>
+
+  <div class="pagination" id="pagination"></div>
+
+  <script>
+    // Hamburger menu toggle
+    const menuToggle = document.getElementById("menu-toggle");
+    const navMenu = document.getElementById("nav-menu");
+
+    menuToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("show");
+    });
+
+    // Cards + Pagination
+    const cards = document.querySelectorAll(".card");
+    const pagination = document.getElementById("pagination");
+
+    function getCardsPerPage() {
+      if (window.innerWidth > 768) {
+        return 5 * 5; // 5 rows × 5 columns = 25 cards per page
+      } else {
+        return cards.length; // Mobile: all cards visible
+      }
+    }
+
+    let cardsPerPage = getCardsPerPage();
+    let currentPage = 1;
+    let totalPages = Math.ceil(cards.length / cardsPerPage);
+
+    function showPage(page) {
+      currentPage = page;
+      const start = (page - 1) * cardsPerPage;
+      const end = start + cardsPerPage;
+
+      cards.forEach((card, index) => {
+        card.style.display = (index >= start && index < end) ? "block" : "none";
+      });
+
+      renderPagination();
+    }
+
+    function renderPagination() {
+      pagination.innerHTML = "";
+      if (cardsPerPage >= cards.length) return; 
+
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement("button");
+        btn.innerText = i;
+        if (i === currentPage) btn.classList.add("active");
+        btn.addEventListener("click", () => showPage(i));
+        pagination.appendChild(btn);
+      }
+    }
+
+    showPage(1);
+
+    window.addEventListener("resize", () => {
+      cardsPerPage = getCardsPerPage();
+      totalPages = Math.ceil(cards.length / cardsPerPage);
+      showPage(1);
+    });
+
+    // 🔍 Search filter
+    const input = document.getElementById("search");
+    input.addEventListener("input", () => {
+      const query = input.value.toLowerCase();
+      let visible = 0;
+
+      cards.forEach(card => {
+        const title = card.querySelector(".title").textContent.toLowerCase();
+        if (title.includes(query)) {
+          card.style.display = "block";
+          visible++;
+        } else {
+          card.style.display = "none";
+        }
+      });
+
+      input.style.width = Math.max(200, input.value.length * 12) + "px";
+    });
+  </script>
+</body>
+</html>

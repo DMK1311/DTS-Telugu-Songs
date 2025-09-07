@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Difference Between Normal Songs and DTS Songs</title>
+  <style>
+    /* Ensure the body has no unexpected styling affecting the layout */
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Container for the player and switch, without affecting other parts of the layout */
+    .audio-container {
+      display: flex;
+      flex-direction: column; /* Stack items vertically */
+      align-items: center; /* Center align items horizontally */
+      padding: 20px;
+    }
+
+    /* Responsive image to match the width of the player */
+    #audioImage {
+      width: 100%; /* Full width of the container */
+      max-width: 600px; /* Optional: Limit the maximum width */
+      height: auto; /* Maintain aspect ratio */
+    }
+
+    /* iOS-style switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px; /* Width of the switch */
+      height: 34px; /* Height of the switch */
+      margin-top: 20px; /* Space between player and switch */
+    }
+
+    /* Hide the default checkbox */
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    /* Slider */
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    /* Slider circle */
+    .slider::before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      border-radius: 50%;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+    }
+
+    /* Checked state */
+    input:checked + .slider {
+      background-color: #ffee33; /* Yellow color when checked */
+    }
+
+    /* Slider circle position when checked */
+    input:checked + .slider::before {
+      transform: translateX(26px);
+    }
+
+    /* Label styles */
+    .switch-label {
+      font-size: 16px;
+      margin-top: 10px; /* Space between switch and label */
+    }
+
+    /* Display the current mode */
+    .current-mode {
+      font-size: 14px;
+      margin-top: 5px; /* Space between label and current mode text */
+      color: #555;
+      display: none; /* Initially hidden */
+    }
+
+    /* Audio player */
+    audio {
+      width: 100%; /* Full width of the container */
+      max-width: 600px; /* Optional: Limit the maximum width */
+    }
+  </style>
+</head>
+<body>
+  <span style="color: red;">NOTE:- Use Earphones/Headphones to listen the difference between regular Stereo Songs and DTS Songs.</span>
+  <ul style="text-align: left;">
+    <li>By using switch below audio player you can switch the Stereo Audio and DTS Surround Audio.</li>
+    <li>The switch off means you are listening in stereo audio.</li>
+    <li>The switch On (turns yellow) means you are listening in DTS Surround Audio.</li>
+  </ul>
+
+  <div class="audio-container">
+    <img alt="Audio Image" id="audioImage" src="https://lh3.googleusercontent.com/pw/AP1GczPXYmzFahFdG38k6JoV2klMMPBCYk3-NiE0hbJayNftns4auTJK1FSDi3-UOs70iI05-DXo8dbXS3kXLXjtEw4jFyUwSp-cnXQCiKvrniQ0oeo-0OU=w2400" />
+    <audio controls id="audioPlayer">
+      <source id="audioSource" src="https://github.com/DMK1311/MP3/raw/main/Stereo.mp3" type="audio/mp3" />
+      Your browser does not support the audio element.
+    </audio>
+    <label class="switch">
+      <input id="switchInput" onclick="toggleAudio()" type="checkbox" />
+      <span class="slider"></span>
+    </label>
+    <span class="switch-label" id="switchLabel">Stereo</span>
+    <span class="current-mode" id="currentMode">Currently playing: Stereo</span>
+  </div>
+
+  <script>
+    let lastPlaybackPosition = 0; // Variable to store the last playback position
+
+    function toggleAudio() {
+      const audioPlayer = document.getElementById('audioPlayer');
+      const audioSource = document.getElementById('audioSource');
+      const audioImage = document.getElementById('audioImage');
+      const switchInput = document.getElementById('switchInput');
+      const switchLabel = document.getElementById('switchLabel');
+      const currentMode = document.getElementById('currentMode');
+
+      // Save the current playback position
+      lastPlaybackPosition = audioPlayer.currentTime;
+
+      // Change audio source and image based on the switch state
+      if (switchInput.checked) {
+        audioSource.src = 'https://github.com/DMK1311/MP3/raw/main/DTS.mp3';
+        audioImage.src = 'https://lh3.googleusercontent.com/pw/AP1GczMX7QSlLiDpdVRAQHbOKPFgDgX08nDl0oKuXHRLuYE2JnY-eOEc_HoT_WSHqCzyMcYQXJ2LspUHZHwVl27pDiunVC7EdZuzjgoZ3O7MvOmQFFSiDlo=w2400'; // Change this to the actual URL of the Dolby Surround image
+        switchLabel.textContent = 'DTS Surround';
+        currentMode.textContent = 'Currently playing: DTS Surround';
+      } else {
+        audioSource.src = 'https://github.com/DMK1311/MP3/raw/main/Stereo.mp3';
+        audioImage.src = 'https://lh3.googleusercontent.com/pw/AP1GczPXYmzFahFdG38k6JoV2klMMPBCYk3-NiE0hbJayNftns4auTJK1FSDi3-UOs70iI05-DXo8dbXS3kXLXjtEw4jFyUwSp-cnXQCiKvrniQ0oeo-0OU=w2400'; // Change this to the actual URL of the Stereo image
+        switchLabel.textContent = 'Stereo';
+        currentMode.textContent = 'Currently playing: Stereo';
+      }
+
+      // Force reload of the audio element
+      audioPlayer.load(); // Reloads the audio element
+
+      // Restore playback position and play the new audio
+      audioPlayer.currentTime = lastPlaybackPosition;
+      audioPlayer.play();
+
+      // Show the current mode text
+      currentMode.style.display = 'block';
+
+      // Check if the page scroll position changes
+      setTimeout(() => {
+        window.scrollTo(0, document.body.scrollTop || document.documentElement.scrollTop);
+      }, 100);
+    }
+
+    function updateModeVisibility() {
+      const audioPlayer = document.getElementById('audioPlayer');
+      const currentMode = document.getElementById('currentMode');
+
+      // Show the current mode text if the audio is playing
+      audioPlayer.addEventListener('play', () => {
+        currentMode.style.display = 'block';
+      });
+
+      // Hide the current mode text if the audio is paused or ended
+      audioPlayer.addEventListener('pause', () => {
+        currentMode.style.display = 'none';
+      });
+
+      audioPlayer.addEventListener('ended', () => {
+        currentMode.style.display = 'none';
+      });
+    }
+
+    // Initialize mode visibility on page load
+    updateModeVisibility();
+  </script>
+</body>
+</html>
+

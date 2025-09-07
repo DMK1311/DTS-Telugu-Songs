@@ -1,0 +1,224 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>DTS Surround Songs</title>
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+
+  <style>
+    /* main theme */
+    #outer-wrapper {
+      margin: 0 auto;
+      background-color: black;
+      box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+    }
+
+    .index #outer-wrapper {
+      background-color: #eee;
+    }
+
+    .row {
+      width: relative;
+    }
+
+    #content-wrapper {
+      margin: 50px auto;
+    }
+
+    #content-wrapper > .container {
+      margin: 0 -20px;
+    }
+
+    #main-wrapper {
+      float: center;
+      overflow: hidden;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 20px;
+    }
+
+    #sidebar-wrapper {
+      display: none;
+    }
+
+    .post-header {
+      display: none;
+    }
+    
+    .widget-content {
+  display: none !important;}
+    
+    .a-enter-vr.fullscreen,
+.a-enter-vr-button,
+.a-enter-ar.a-hidden,
+.a-enter-ar-button{
+  display: none !important;}
+
+/*theater*/
+.content-overlay {
+      position: relative;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 0%);
+      text-align: center;
+      z-index: 10;
+      width: 90%;
+      max-width: 700px;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; text-shadow: 0 0 10px; }
+      50% { opacity: 0.8; text-shadow: 0 0 4px; }
+      60% { opacity: 1; text-shadow: 0 0 12px; }
+      70% { opacity: 0.6; text-shadow: 0 0 3px; }
+      80%, 90% { opacity: 1; text-shadow: 0 0 10px; }
+    }
+
+    .content-overlay h1 {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      color: #00ffff;
+      background: rgba(255, 255, 255, 0.1);
+      text-shadow:
+        0 0 5px #00ffff,
+        0 0 10px #00ffff;
+      animation: flicker 3s infinite ease-in-out;
+    }
+
+    .content-overlay p {
+      font-size: 1.3rem;
+      color: #fff;
+      background:rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      text-shadow:
+        0 0 5px #000,
+        0 0 8px #000;
+    }
+
+    .enter-button {
+      padding: 12px 28px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(90deg, #3a00e6, #e600de);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow:
+        0 0 10px #e600de,
+        0 0 15px #3a00e6;
+      transition: all 0.3s ease;
+    }
+
+    .enter-button:hover {
+      transform: scale(1.05);
+      box-shadow:
+        0 0 15px #e600de,
+        0 0 30px #3a00e6;
+    }
+
+    
+    
+    
+/*loader*/    
+#loader {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #00ffff;
+  border-top: 6px solid #e600de;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+  </style>
+</head>
+
+  
+  
+  
+  <body>
+  <!--loading-->  
+<div id="loader">
+  <div class="spinner"></div>
+</div>
+
+  
+
+  
+  
+  
+  
+  <!-- UI Overlay on Top -->
+  <div class="content-overlay">
+    <h1>Welcome to the DTS Telugu Songs!</h1>
+    <p>Theater-level Surround Audio – Only for Headphones</p>
+    <button class="enter-button" onclick="markAndEnter()">Enter</button>
+  </div>
+
+  <!-- A-Frame Scene with 360° Background -->
+  <a-scene>
+    <!-- Auto rotating camera rig -->
+    <a-entity id="rig">
+      <a-entity camera="" position="0 1.6 0"></a-entity>
+    </a-entity>
+
+    <!-- Theater Background (360° image) -->
+    <a-sky rotation="0 -90 0" src="https://i.postimg.cc/CLRFV87Y/All-Lights-ON-Curved.png"></a-sky>
+  </a-scene>
+
+<script>
+  const rig = document.querySelector('#rig');
+  let angle = 0;
+  let sceneLoaded = false;
+
+  function rotateRig() {
+    if (sceneLoaded) {
+      angle += 0.6;
+      rig.setAttribute('rotation', `0 ${angle} 0`);
+    }
+    requestAnimationFrame(rotateRig);
+  }
+
+  // 🌀 Start rotation loop
+  rotateRig();
+
+  // ✅ Wait until scene + loader is done
+  window.addEventListener("load", () => {
+    const loader = document.getElementById("loader");
+    loader.style.transition = "opacity 0.8s ease";
+    loader.style.opacity = "0";
+    setTimeout(() => {
+      loader.style.display = "none";
+      sceneLoaded = true; // 🔥 Start rotation here!
+    }, 800);
+  });
+  
+    function markAndEnter() {
+      sessionStorage.setItem('cameFromLanding', 'true');
+      window.location.href = "DTS Telugu Songs.html";
+    }
+  </script>
+
+  </body>
+</html>
