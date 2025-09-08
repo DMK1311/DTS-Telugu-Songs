@@ -110,7 +110,7 @@
   <div class="audio-container">
     <img alt="Audio Image" id="audioImage" src="https://lh3.googleusercontent.com/pw/AP1GczPXYmzFahFdG38k6JoV2klMMPBCYk3-NiE0hbJayNftns4auTJK1FSDi3-UOs70iI05-DXo8dbXS3kXLXjtEw4jFyUwSp-cnXQCiKvrniQ0oeo-0OU=w2400" />
     <audio controls id="audioPlayer">
-      <source id="audioSource" src="https://github.com/DMK1311/DTS-Telugu-Songs/blob/main/Stereo.mp3" type="audio/mp3" />
+      <source id="audioSource" src="https://raw.githubusercontent.com/DMK1311/DTS-Telugu-Songs/main/Stereo.mp3" type="audio/mp3" />
       Your browser does not support the audio element.
     </audio>
     <label class="switch">
@@ -137,12 +137,12 @@
 
       // Change audio source and image based on the switch state
       if (switchInput.checked) {
-        audioSource.src = 'https://github.com/DMK1311/DTS-Telugu-Songs/blob/main/DTS.mp3';
+        audioSource.src = 'https://raw.githubusercontent.com/DMK1311/DTS-Telugu-Songs/main/DTS.mp3';
         audioImage.src = 'https://lh3.googleusercontent.com/pw/AP1GczMX7QSlLiDpdVRAQHbOKPFgDgX08nDl0oKuXHRLuYE2JnY-eOEc_HoT_WSHqCzyMcYQXJ2LspUHZHwVl27pDiunVC7EdZuzjgoZ3O7MvOmQFFSiDlo=w2400'; // Change this to the actual URL of the Dolby Surround image
         switchLabel.textContent = 'DTS Surround';
         currentMode.textContent = 'Currently playing: DTS Surround';
       } else {
-        audioSource.src = 'https://github.com/DMK1311/DTS-Telugu-Songs/blob/main/Stereo.mp3';
+        audioSource.src = 'https://raw.githubusercontent.com/DMK1311/DTS-Telugu-Songs/main/Stereo.mp3';
         audioImage.src = 'https://lh3.googleusercontent.com/pw/AP1GczPXYmzFahFdG38k6JoV2klMMPBCYk3-NiE0hbJayNftns4auTJK1FSDi3-UOs70iI05-DXo8dbXS3kXLXjtEw4jFyUwSp-cnXQCiKvrniQ0oeo-0OU=w2400'; // Change this to the actual URL of the Stereo image
         switchLabel.textContent = 'Stereo';
         currentMode.textContent = 'Currently playing: Stereo';
@@ -188,6 +188,7 @@
   </script>
 </body>
 </html>
+
 
 
 
